@@ -1,0 +1,4 @@
+# Special Customise Git Config
+
+# node_modules dizinini takip etmesin
+/node_modules
