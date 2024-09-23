@@ -86,27 +86,33 @@ Not: Docker işlerini yürütürken YAML dosyası ile Servislerimizi(Dockerfile,
 
 ## Jenkins Doğuşunu
 ```sh
+2005 yılında Sun Microsystem firmasında(Java'nın kurucu firması) çalışan birisi HUDSON isimli bir CI araçı geliştiriyor.
+
+2009 yılında Oracle sun Microsystem firmasını satın alıyor ve Anlaşmazlıkla meydana geliyor Hudson isimli projeyi yazan kişi kaynak kodları alıyor ve buna JENKINS diyor.
 
 ```
 ---
 
 
-## Jenkins
+## Jenkins Amaçı
 ```sh
-
+Projeyi Derlemek(Compiler)
+Otomatik Testler yapmak
+Statik kod analizi yapmak(SonarQube)
+Teslimat(Depyloment)
+Ekip çalışanlarımızı bu konularla haberdar etmek
+Maven,SonarQube,Docker,K8S
 ```
 ---
-
-
-## Jenkins
-```sh
-
-```
----
-
 
 ## Jenkins Kurulumları
 ```sh
+DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
+1-) Git (git -v)
+2-) Maven (mvn -v)
+3-) JDK8 veya JDK11 (java --version)
+4-) Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
+
 
 ```
 ---
