@@ -40,7 +40,6 @@ CD:  Continuous Delivery  ve Continuous Deployment
 Eğer CI tarafı başarılı(success) ise CD tarafı başlayacaktır.
 Eğer herşey otomatik olmasını istiyorsak => Continuous Deployment
 Eğer onay mekanizması(manuel) olmasını istiyorsak => Continuous Delivery
-
 ```
 ---
 
@@ -59,7 +58,6 @@ GitLab:
 Bir CI araçıdır.
 Öğrenme Eğrisi kolaydır  
 Çok fazla pluginler yoktur
-
 ```
 ---
 
@@ -89,7 +87,6 @@ Not: Docker işlerini yürütürken YAML dosyası ile Servislerimizi(Dockerfile,
 2005 yılında Sun Microsystem firmasında(Java'nın kurucu firması) çalışan birisi HUDSON isimli bir CI araçı geliştiriyor.
 
 2009 yılında Oracle sun Microsystem firmasını satın alıyor ve Anlaşmazlıkla meydana geliyor Hudson isimli projeyi yazan kişi kaynak kodları alıyor ve buna JENKINS diyor.
-
 ```
 ---
 
@@ -361,7 +358,8 @@ DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
 1-) Git (git -v)
 2-) Maven (mvn -v)
 3-) JDK11 (java --version)
-4-) Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
+4-) Docker (docker version)
+DİKKATTTT::: Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
 ```
 ---
 
@@ -370,12 +368,18 @@ DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
 ```sh
 https://www.jenkins.io/download/
 
-Windows indir => https://www.jenkins.io/download/thank-you-downloading-windows-installer-stable/
+Git => https://git-scm.com/downloads
+
+Docker Desktop Wind11 => https://docs.docker.com/desktop/install/windows-install/
+
+Jenkins Windows indir => https://www.jenkins.io/download/thank-you-downloading-windows-installer-stable/
 
 JDK 11 => C:\Program Files\Java\jdk-11.0.16.1\
 Administrator password => C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
 cat C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
 5d92b17c5714434389bfc1826fa66758
+
+Maven => https://maven.apache.org/download.cgi
 
 http://lcoalhost:9999
 username: admin
@@ -403,6 +407,9 @@ MAVEN
 version: mvn -v
 name: Maven_Workshop
 path: D:\1_Kodlar\maven\apache-maven-3.9.8
+
+DOCKER
+version: docker version
 ```
 ---
 
@@ -424,7 +431,11 @@ Plugin Name: Oracle Java SE Development Kit Installer Plugin
 MAVEN
 version: mvn -v
 Plugin Name: Maven Integration plugin
-Version3.23
+
+
+DOCKER
+version: docker version
+Plugin Name: Docker plugin
 ```
 ---
 
@@ -433,10 +444,12 @@ Version3.23
 ## Jenkins Docker Kurulumları
 ```sh
 DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
+DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
 1-) Git (git -v)
 2-) Maven (mvn -v)
 3-) JDK11 (java --version)
-4-) Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
+4-) Docker (docker version)
+DİKKATTTT::: Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
 ```
 ---
 
@@ -478,6 +491,10 @@ MAVEN
 version: mvn -v
 name: Maven_Workshop
 path: D:\1_Kodlar\maven\apache-maven-3.9.8
+
+DOCKER
+version: docker version
+Plugin Name: Docker plugin
 ```
 ---
 
