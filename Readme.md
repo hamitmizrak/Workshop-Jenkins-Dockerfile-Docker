@@ -456,6 +456,56 @@ DİKKATTTT::: Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
 
 ## Docker Üzerinden Jenkins Kurulumu 
 ```sh
+docker version
+docker search jenkins
+docker pull jenkins/jenkins:lts-jdk11
+
+docker container run -d --name docker_jenkins  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+
+docker ps 
+docker ps -a
+docker container ls
+docker container ls -a
+
+docker logs docker_jenkins
+winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+Administrator password: 946654cf512c480ab839b3b12c5d67a1
+
+**Offline This Jenkins instance appears to be offline.**
+DİKKKATTTT : Eğer Yukarıdaki Hata geliyorsa terminalde şunları yapıyorum.
+
+winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
+<sites>
+  <site>
+    <id>default</id>
+    <url>https://updates.jenkins.io/update-center.json</url>
+  </site>
+</sites>
+
+
+winpty docker exec -it docker_jenkins bash  -c "cat >> /var/jenkins_home/hudson.model.UpdateCenter.xml"
+<sites>
+  <site>
+    <id>default</id>
+    <url>http://updates.jenkins.io/update-center.json</url>
+  </site>
+</sites>
+
+
+docker container restart docker_jenkins
+winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
+
+
+docker ps 
+docker container --help
+docker container restart containerID
+docker container restart containerNAME
+docker container restart docker_jenkins
+
+
+
+
+
 https://www.jenkins.io/download/
 
 Windows indir => https://www.jenkins.io/download/thank-you-downloading-windows-installer-stable/
