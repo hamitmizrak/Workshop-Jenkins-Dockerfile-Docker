@@ -110,7 +110,7 @@ Maven,SonarQube,Docker,K8S
 DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
 1-) Git (git -v)
 2-) Maven (mvn -v)
-3-) JDK8 veya JDK11 (java --version)
+3-) JDK11 (java --version)
 4-) Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
 
 
