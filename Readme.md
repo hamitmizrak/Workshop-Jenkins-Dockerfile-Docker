@@ -118,28 +118,84 @@ DİKKATTTT: Jenkins kurulmadan önce bilgisayarımızda kurmamız gerekenler
 ---
 
 
-## Jenkins
+## Windows Jenkins Kurulumu 
+```sh
+https://www.jenkins.io/download/
+
+Windows indir => https://www.jenkins.io/download/thank-you-downloading-windows-installer-stable/
+
+JDK 11 => C:\Program Files\Java\jdk-11.0.16.1\
+Administrator password => C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
+cat C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
+5d92b17c5714434389bfc1826fa66758
+
+http://lcoalhost:9999
+username: admin
+password: adminadmin
+```
+---
+
+## Windows Jenkins Path 
+```sh
+http://localhost:9999/manage/configureTools/
+
+GİT
+version: git -v
+name: Git_Workshop
+path: C:\Program Files\Git\bin\git.exe
+
+
+JDK
+version: java --version
+name: JDK11_Workshop
+path: C:\Program Files\Java\jdk-11.0.16.1
+
+
+MAVEN
+version: mvn -v
+name: Maven_Workshop
+path: D:\1_Kodlar\maven\apache-maven-3.9.8
+```
+---
+
+
+## Windows Jenkins Plugin 
+```sh
+http://localhost:9999/manage/configureTools/
+
+GİTHUB
+version: git -v
+Plugin Name: GitHub Integration Plugin
+
+
+JDK
+version: java --version
+Plugin Name: Oracle Java SE Development Kit Installer Plugin 
+
+
+MAVEN
+version: mvn -v
+Plugin Name: Maven Integration plugin
+Version3.23
+```
+---
+
+
+## Linux(Ubuntu) Jenkins Kurulumu 
 ```sh
 
 ```
 ---
 
 
-## Jenkins
+## Docker Pulling Jenkins
 ```sh
 
 ```
 ---
 
 
-## Jenkins
-```sh
-
-```
----
-
-
-## Jenkins
+## Docker, Dockerfile, docker-compose.yml Jenkins
 ```sh
 
 ```
