@@ -1,5 +1,5 @@
 # Workshop  Jenkins
-[GitHub]()
+[GitHub](https://github.com/hamitmizrak/Workshop-Jenkins-Dockerfile-Docker)
 --- 
 
 
@@ -26,15 +26,37 @@ git logs
 ---
 
 
-## Jenkins
+## CI/CD
 ```sh
+CI: Continous Integration(Sürekli Teslimat):  
+Projede öncelikle bir derleme(Compiler) yapılır.
+Sonrasında Test(Unit Test)
+Bu iki adımı Compiler,Test eğer başarılı ise CD kısmına geçecektir. 
+Eğer bu iki adımdan yani, Compiler veya Test başarılı değilse CD tarafına geçilmez.
+
+CD:  Continuous Delivery  ve Continuous Deployment
+Eğer CI tarafı başarılı(success) ise CD tarafı başlayacaktır.
+Eğer herşey otomatik olmasını istiyorsak => Continuous Deployment
+Eğer onay mekanizması(manuel) olmasını istiyorsak => Continuous Delivery
 
 ```
 ---
 
 
-## Jenkins
+## Jenkins & GitLab
 ```sh
+Jenkins: 
+Ücretsizdir
+Açık Kaynak kodludur. 
+Çok popüler bir CI araçıdır. 
+Öğrenme Eğrisi Diktir  
+Çok fazla pluginler vardır
+
+GitLab:
+Ücretsizdir ancak ücretli versiyonuda vardır.
+Bir CI araçıdır.
+Öğrenme Eğrisi kolaydır  
+Çok fazla pluginler yoktur
 
 ```
 ---
