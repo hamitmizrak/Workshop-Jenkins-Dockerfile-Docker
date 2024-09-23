@@ -1,5 +1,7 @@
 # Workshop  Jenkins
 [GitHub](https://github.com/hamitmizrak/Workshop-Jenkins-Dockerfile-Docker)
+[Jenkins Resmi Sitesi](https://www.jenkins.io/)
+[Jenkins Pipeline Document](https://www.jenkins.io/doc/book/pipeline/)
 --- 
 
 
@@ -62,7 +64,27 @@ Bir CI araçıdır.
 ---
 
 
-## Jenkins
+## Jenkins Nedir ?
+```sh
+Java ile yazılmıştır. Dikkat JDK-8 veya JDK-11 kullanın son sürümlerde çalışmıyooooorrrr
+Ücretsizdir
+Cross platform(Farklı işletim sistemlerinden de kullanılır.)
+Açık Kaynak kodludur. 
+Çok popüler bir CI araçıdır. 
+Öğrenme Eğrisi Diktir  
+Çok fazla pluginler vardır.
+Tekrarlanan görevlerin otomatik çalışmasını sağlamak için gerekli bir Devops CI araçıdır.
+Proje kodlarımızdaki hataları hızlıca bulup çözmek
+Zamandan tasarruf sağlamak => Zaman maliyeti en az indirgemek
+Jenkinsde öğrenme eğrisi diktir.
+Yaklaşık +500 fazla plugini vardır.
+Sadece CI ile ilgilenmez Aynı zamanda CD tarafından çalışmaktadır. 
+Jenkins işlerini yürütürken Grovy ile yazılan görevler(task) belirleriz.
+Not: Docker işlerini yürütürken YAML dosyası ile Servislerimizi(Dockerfile,docker-compose.yml) ile yaparız.
+```
+---
+
+## Jenkins Doğuşunu
 ```sh
 
 ```
@@ -83,14 +105,7 @@ Bir CI araçıdır.
 ---
 
 
-## Jenkins
-```sh
-
-```
----
-
-
-## Jenkins
+## Jenkins Kurulumları
 ```sh
 
 ```
