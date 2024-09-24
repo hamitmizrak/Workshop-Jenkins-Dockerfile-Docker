@@ -538,8 +538,11 @@ docker container run -d --name docker_jenkins --dns 8.8.8.8 --dns 8.8.4.4  -p 88
 docker container run -d --name docker_jenkins  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
 docker container run -d --name docker_jenkins --dns 8.8.8.8 --dns 8.8.4.4  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
 
+# terminal Üzerinden Administrator password
+winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+
 # (HTTPS) =>  (HTTP)
-winpty docker exec -it docker_jenkins bash
+winpty docker exec -it docker_jenkins bash -c "sed -i 's/https/http/g' /var/jenkins_home/hudson.model.UpdateCenter.xml"
 sed -i 's/https/http/g' /var/jenkins_home/hudson.model.UpdateCenter.xml 
 
 docker ps 
@@ -551,7 +554,7 @@ winpty docker exec -it docker_jenkins java -version
 docker logs docker_jenkins
 winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
 Administrator password: 
-c7d6c30b5ca74c0abc812a0fbeb46c05
+b15bf732fe73439caa07cd5089746dc7
 
 winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
 docker container restart docker_jenkins
@@ -572,8 +575,6 @@ username: admin
 password: adminadmin
 ```
 ---
-
-
 
 
 ## Docker Üzerinden Jenkins Path 
