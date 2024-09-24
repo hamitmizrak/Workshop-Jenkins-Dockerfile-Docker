@@ -628,29 +628,10 @@ Version3.23
 
 
 
-## Linux(Ubuntu) Jenkins Kurulumu 
+## Jenkinsfile GitHub Pulling
 ```sh
-
-```
----
-
-
-## Docker Pulling Jenkins
-```sh
-
-```
----
-
-
-## Docker, Dockerfile, docker-compose.yml Jenkins
-```sh
-
-```
----
-
-
-## Jenkins
-```sh
+GitHub Adres: https://github.com/hamitmizrak/Workshop-Jenkins-Dockerfile-Docker
+Branch      : main
 
 ```
 ---
