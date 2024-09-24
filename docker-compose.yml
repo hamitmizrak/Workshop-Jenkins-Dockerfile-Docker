@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  jenkins:
+    # image: jenkins/jenkins:lts # Bu komut içinde JDK11 ile gömülü çalışıyor.
+    image: jenkins_image
+    container_name: jenkins_container
+    user: root
+    build: .
+    ports:
+      - "1111:8080"   # Jenkins'in web arayüzü için kullanılan port
+      - "50000:50000" # Jenkins agent bağlantıları için kullanılan port
+    volumes:
+      - jenkins_home:/var/jenkins_home  # Jenkins verilerinin saklanacağı volume
+    networks:
+      - jenkins_network  # Özel bir network kullanıyoruz
+    environment:
+      JENKINS_ADMIN_ID: admin  # Yönetici kullanıcı adı
+      JENKINS_ADMIN_PASSWORD: admin  # Yönetici parolası
+
+volumes:
+  jenkins_home:  # Jenkins verilerini saklamak için bir volume tanımlıyoruz
+    driver: local
+
+networks:
+  jenkins_network:
+    driver: bridge  # Bridge network ile farklı servisler arasında bağlantı sağlıyoruz
