@@ -1,0 +1,19 @@
+// Jenkins pipeline kod: Declarative Pipeline'dir
+// pipeline {}: Başlangıç ve Bitişi Gösterir.
+pipeline {
+    
+    // Pipelineların hangi Ajan(agent) üzerinden çalışacağını gösterir.
+    // Ajanlar Jenkins yapısında Master veya başka jenkins düğümleri(node) üzerinden de çalışabilir
+    // any: Bu parametre Pipeline'ların herhangi bir ajan üzerinden çalışacağını söylüyor. 
+    // agent { label 'my-agent' } : Bu Ajan(Agent) label'inden bu etikete sahip plan ajanlarda çalış.
+    agent any
+
+    stages {
+        // Tek Aşamalı bir alan(Stage
+        stage('Build') {
+            steps {
+                echo 'Build Başarılı'
+            }
+        }
+    }
+}
