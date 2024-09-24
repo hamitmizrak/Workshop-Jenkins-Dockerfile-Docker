@@ -454,26 +454,40 @@ DİKKATTTT::: Jenkins'i yukarıdakiler kuruluysa, jenkins'i kurmalıyım.
 ---
 
 
-## Docker Üzerinden Jenkins Kurulumu 
+## Docker Üzerinden Jenkins Kurulumu (1.YOL)
 ```sh
 docker version
 docker search jenkins
 docker pull jenkins/jenkins:lts-jdk11
+docker pull jenkins/jenkins:lts-jdk17
 
 docker container run -d --name docker_jenkins  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+docker container run -d --name docker_jenkins --dns 8.8.8.8 --dns 8.8.4.4  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+
+
+docker container run -d --name docker_jenkins  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
+docker container run -d --name docker_jenkins --dns 8.8.8.8 --dns 8.8.4.4  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
+
 
 docker ps 
 docker ps -a
 docker container ls
 docker container ls -a
+winpty docker exec -it docker_jenkins java -version
+
+
 
 docker logs docker_jenkins
 winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
-Administrator password: 946654cf512c480ab839b3b12c5d67a1
+Administrator password: 
+c7d6c30b5ca74c0abc812a0fbeb46c05
+
+
 
 **Offline This Jenkins instance appears to be offline.**
 DİKKKATTTT : Eğer Yukarıdaki Hata geliyorsa terminalde şunları yapıyorum.
 
+# 1.YOL (HTTP)
 winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
 <sites>
   <site>
@@ -483,7 +497,7 @@ winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.mod
 </sites>
 
 
-winpty docker exec -it docker_jenkins bash  -c "cat >> /var/jenkins_home/hudson.model.UpdateCenter.xml"
+winpty docker exec -it docker_jenkins bash  -c "cat > /var/jenkins_home/hudson.model.UpdateCenter.xml"
 <sites>
   <site>
     <id>default</id>
@@ -491,10 +505,58 @@ winpty docker exec -it docker_jenkins bash  -c "cat >> /var/jenkins_home/hudson.
   </site>
 </sites>
 
-
+winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
 docker container restart docker_jenkins
 winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
+http://localhost:8888/
 
+docker ps 
+docker container --help
+docker container restart containerID
+docker container restart containerNAME
+docker container restart docker_jenkins
+docker container stop docker_jenkins
+docker container start docker_jenkins
+
+http://localhost:9999
+username: admin
+password: adminadmin
+```
+---
+
+
+## Docker Üzerinden Jenkins Kurulumu (2.YOL)
+```sh
+docker version
+docker search jenkins
+docker pull jenkins/jenkins:lts-jdk11
+docker pull jenkins/jenkins:lts-jdk17
+
+docker container run -d --name docker_jenkins  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+docker container run -d --name docker_jenkins --dns 8.8.8.8 --dns 8.8.4.4  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk11
+
+docker container run -d --name docker_jenkins  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
+docker container run -d --name docker_jenkins --dns 8.8.8.8 --dns 8.8.4.4  -p 8888:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
+
+# (HTTPS) =>  (HTTP)
+winpty docker exec -it docker_jenkins bash
+sed -i 's/https/http/g' /var/jenkins_home/hudson.model.UpdateCenter.xml 
+
+docker ps 
+docker ps -a
+docker container ls
+docker container ls -a
+winpty docker exec -it docker_jenkins java -version
+
+docker logs docker_jenkins
+winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+Administrator password: 
+c7d6c30b5ca74c0abc812a0fbeb46c05
+
+winpty docker exec -it docker_jenkins bash  -c "cat /var/jenkins_home/hudson.model.UpdateCenter.xml"
+docker container restart docker_jenkins
+
+http://localhost:8888/
 
 docker ps 
 docker container --help
@@ -502,24 +564,17 @@ docker container restart containerID
 docker container restart containerNAME
 docker container restart docker_jenkins
 
+docker container stop docker_jenkins
+docker container start docker_jenkins
 
-
-
-
-https://www.jenkins.io/download/
-
-Windows indir => https://www.jenkins.io/download/thank-you-downloading-windows-installer-stable/
-
-JDK 11 => C:\Program Files\Java\jdk-11.0.16.1\
-Administrator password => C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
-cat C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword
-5d92b17c5714434389bfc1826fa66758
-
-http://lcoalhost:9999
+http://localhost:9999
 username: admin
 password: adminadmin
 ```
 ---
+
+
+
 
 ## Docker Üzerinden Jenkins Path 
 ```sh
