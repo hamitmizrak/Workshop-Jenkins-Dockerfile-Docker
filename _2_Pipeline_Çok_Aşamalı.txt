@@ -8,6 +8,7 @@ pipeline {
     // agent { label 'my-agent' } : Bu Ajan(Agent) label'inden bu etikete sahip plan ajanlarda çalış.
     agent any
 
+    // Durumlar (Stages)
     stages {
         
         // Hazırlık
@@ -43,6 +44,18 @@ pipeline {
                 echo 'Deployment Başarılı'
             }
         } // end Deployment
-       
+        
     } //end Stages
+    
+    // Pipeline sonrasındaki Yapılacak İşlemler
+    post {
+        success {
+            echo 'Pipeline Başarılı bir şekilde çalıştı'
+        }
+        
+        failure {
+            echo 'Pipeline Başarısız '
+        }
+    }
+    
 } //end Pipeline
