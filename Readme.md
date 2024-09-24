@@ -628,17 +628,22 @@ Version3.23
 
 
 
-## Jenkinsfile GitHub Pulling
+## Jenkinsfile GitHub Pulling (Public)
 ```sh
 GitHub Adres: https://github.com/hamitmizrak/Workshop-Jenkins-Dockerfile-Docker
 Branch      : main
+
+FreeStyle
 
 ```
 ---
 
 
-## Jenkins
+## Jenkinsfile GitHub Pulling (Private)
 ```sh
+Jenkins Private Project 
+GitHub Adres: https://github.com/hamitmizrak/icisleri_private
+Branch Name:  main
 
 ```
 ---

@@ -1,5 +1,6 @@
 // Jenkins pipeline kod: Declarative Pipeline'dir
 // pipeline {}: Başlangıç ve Bitişi Gösterir.
+// NOT: Echo yazdırırken Çift tırnak kullandım.
 pipeline {
     
     // Ortam  Değişkenleri
@@ -20,7 +21,7 @@ pipeline {
         // Hazırlık
         stage('Checkout') {
             steps {
-                echo '${APP_NAME} Hazırlık Aşaması ${AUTHOR}'
+                echo "${APP_NAME} Hazırlık Aşaması ${AUTHOR}"
             }
         }  // end Checkout
         
@@ -28,7 +29,7 @@ pipeline {
         // Build Alanı : Uygulamanın Derlendiği (Compiler) olduğu yer
         stage('Build') {
             steps {
-                echo 'Build Başarılı'
+                echo "Build Başarılı"
                 // Build işlemleri
                 // sh 'mvn clean install' // Maven kullanarak Projeyi derledim
             }
@@ -38,7 +39,7 @@ pipeline {
         // Test Alanı : Uygulamadaki Testlerin çalıştığı yer
         stage('Test') {
             steps {
-                echo 'Test Başarılı'
+                echo "Test Başarılı"
                 // sh 'mvn test' // Maven kullanarak Projeyi Testlerini çalıştırdım
             }
         } // end Test
@@ -47,7 +48,7 @@ pipeline {
         // Deploy Alanı : Uygulamanın Dağıtıldığı yer
         stage('Deployment') {
             steps {
-                echo 'Deployment Başarılı'
+                echo "Deployment Başarılı"
             }
         } // end Deployment
         
@@ -56,11 +57,11 @@ pipeline {
     // Pipeline sonrasındaki Yapılacak İşlemler
     post {
         success {
-            echo 'Pipeline Başarılı bir şekilde çalıştı'
+            echo "Pipeline Başarılı bir şekilde çalıştı"
         }
         
         failure {
-            echo 'Pipeline Başarısız '
+            echo "Pipeline Başarısız"
         }
     }
     
