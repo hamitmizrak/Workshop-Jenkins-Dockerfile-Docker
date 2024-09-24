@@ -2,6 +2,12 @@
 // pipeline {}: Başlangıç ve Bitişi Gösterir.
 pipeline {
     
+    // Ortam  Değişkenleri
+    environment {
+        APP_NAME = 'Jenkins'
+        AUTHOR = 'Hamit MIZRAK'
+    }
+    
     // Pipelineların hangi Ajan(agent) üzerinden çalışacağını gösterir.
     // Ajanlar Jenkins yapısında Master veya başka jenkins düğümleri(node) üzerinden de çalışabilir
     // any: Bu parametre Pipeline'ların herhangi bir ajan üzerinden çalışacağını söylüyor. 
@@ -14,7 +20,7 @@ pipeline {
         // Hazırlık
         stage('Checkout') {
             steps {
-                echo 'Hazırlık Aşaması'
+                echo '${APP_NAME} Hazırlık Aşaması ${AUTHOR}'
             }
         }  // end Checkout
         
