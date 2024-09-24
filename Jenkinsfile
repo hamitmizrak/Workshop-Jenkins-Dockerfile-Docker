@@ -1,0 +1,67 @@
+// Jenkins pipeline kod: Declarative Pipeline'dir
+// pipeline {}: Başlangıç ve Bitişi Gösterir.
+pipeline {
+    
+    // Ortam  Değişkenleri
+    environment {
+        APP_NAME = 'Jenkins'
+        AUTHOR = 'Hamit MIZRAK'
+    }
+    
+    // Pipelineların hangi Ajan(agent) üzerinden çalışacağını gösterir.
+    // Ajanlar Jenkins yapısında Master veya başka jenkins düğümleri(node) üzerinden de çalışabilir
+    // any: Bu parametre Pipeline'ların herhangi bir ajan üzerinden çalışacağını söylüyor. 
+    // agent { label 'my-agent' } : Bu Ajan(Agent) label'inden bu etikete sahip plan ajanlarda çalış.
+    agent any
+
+    // Durumlar (Stages)
+    stages {
+        
+        // Hazırlık
+        stage('Checkout') {
+            steps {
+                echo '${APP_NAME} Hazırlık Aşaması ${AUTHOR}'
+            }
+        }  // end Checkout
+        
+        
+        // Build Alanı : Uygulamanın Derlendiği (Compiler) olduğu yer
+        stage('Build') {
+            steps {
+                echo 'Build Başarılı'
+                // Build işlemleri
+                // sh 'mvn clean install' // Maven kullanarak Projeyi derledim
+            }
+        }  // end Test
+        
+        
+        // Test Alanı : Uygulamadaki Testlerin çalıştığı yer
+        stage('Test') {
+            steps {
+                echo 'Test Başarılı'
+                // sh 'mvn test' // Maven kullanarak Projeyi Testlerini çalıştırdım
+            }
+        } // end Test
+        
+        
+        // Deploy Alanı : Uygulamanın Dağıtıldığı yer
+        stage('Deployment') {
+            steps {
+                echo 'Deployment Başarılı'
+            }
+        } // end Deployment
+        
+    } //end Stages
+    
+    // Pipeline sonrasındaki Yapılacak İşlemler
+    post {
+        success {
+            echo 'Pipeline Başarılı bir şekilde çalıştı'
+        }
+        
+        failure {
+            echo 'Pipeline Başarısız '
+        }
+    }
+    
+} //end Pipeline
