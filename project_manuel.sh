@@ -20,9 +20,40 @@ colors=(
 
 # Bash scriptlere izin vermek
 chmod +x ./countdown.sh
+chmod +x ./import_cert.sh
+
+
 
 ########################################################################################################################################
 ########################################################################################################################################
+# NOT: Bu sertifaika çalışabilmesi için JDK 
+# C:\Program Files\Java\jdk-11.0.16.1\lib\security
+#
+jenkins_cert_files() {
+    # Jenkins Restart
+    echo -e "${colors[2]}jenkins SSL Cert Başladı ... "
+
+
+# Dosyanın var olup olmadığını kontrol et
+if [ -f "jenkins-cert.pem" ]; then
+    echo "jenkins-cert.pem dosyası bulundu, siliniyor..."
+    rm jenkins-cert.pem
+    echo "Dosya silindi."
+else
+    echo "jenkins-cert.pem dosyası bulunamadı."
+fi
+
+    openssl s_client -showcerts -connect updates.jenkins.io:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > jenkins-cert.pem
+    #touch import_cert.sh
+    chmod +x import_cert.sh
+    #nano import_cert.sh
+    #  ./import_cert.sh 
+     source  ./import_cert.sh 
+    # ./import_cert.sh & # Arka planda çalıştır
+}
+
+jenkins_cert_files
+
 
 ########################################################################################################################################
 ########################################################################################################################################
@@ -66,6 +97,9 @@ jenkins_count_down() {
 
 
 
+
+
+
 ########################################################################################################################################
 ########################################################################################################################################
 jenkins_restart() {
@@ -80,7 +114,7 @@ jenkins_restart() {
 ########################################################################################################################################
 jenkins_https() {
     # terminal Üzerinden Administrator password
-    winpty docker exec -it jenkins_container bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+    # winpty docker exec -it jenkins_container bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
     # Listelemek
     ls -al
     pwd
@@ -110,7 +144,13 @@ jenkins_https() {
 
 ########################################################################################################################################
 ########################################################################################################################################
-jenkins_install() {
+
+
+
+
+########################################################################################################################################
+########################################################################################################################################
+start_jenkins() {
     # Jenkins adında bir container'ın oluşup oluşmadığını kontrol eden fonksiyon
     check_jenkins() {
         docker ps --filter "name=jenkins_container" --format "{{.Names}}" | grep -w "jenkins_container" >/dev/null
@@ -131,8 +171,8 @@ jenkins_install() {
     echo -e "${colors[3]}Jenkins container kuruldu, docker ps çalıştırılıyor\033[0m"
     docker ps
     docker logs jenkins_container
-    winpty docker exec -it jenkins_container bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
-    winpty docker exec -it jenkins_container java -version
+    # winpty docker exec -it jenkins_container bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+    #winpty docker exec -it jenkins_container java -version
 
     # Https Çalışsın
     jenkins_https
@@ -140,8 +180,54 @@ jenkins_install() {
     jenkins_restart
 }
 
-jenkins_install
+start_jenkins
 
 ########################################################################################################################################
 ########################################################################################################################################
+
+# Jenkins'i durdurmak için
+stop_jenkins() {
+  echo "Jenkins durduruluyor..."
+  docker-compose down
+}
+
+
+
+########################################################################################################################################
+########################################################################################################################################
+
+# Status kontrolü
+status_jenkins(){
+# Jenkins konteynerinin durumunu kontrol ediyoruz
+status=$(docker inspect -f '{{.State.Status}}' jenkins_container)
+
+# Eğer konteyner "running" durumundaysa şifreyi okuyoruz
+if [ "$status" == "running" ]; then
+  echo "Jenkins konteyneri çalıştı."
+  # Şifreyi alıyoruz
+  winpty docker exec -it jenkins_container bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+  docker-compose ps
+else
+  echo "Jenkins konteyneri çalışmıyor. Durumu: $status"
+fi
+}
+status_jenkins
+
+########################################################################################################################################
+########################################################################################################################################
+
+case "$1" in
+  start)
+    start_jenkins
+    ;;
+  stop)
+    stop_jenkins
+    ;;
+  status)
+    status_jenkins
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status}"
+    exit 1
+esac
 

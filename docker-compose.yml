@@ -9,14 +9,19 @@ services:
     build: .
     ports:
       - "1111:8080"   # Jenkins'in web arayüzü için kullanılan port
+      - "8444:8443"
       - "50000:50000" # Jenkins agent bağlantıları için kullanılan port
     volumes:
       - jenkins_home:/var/jenkins_home  # Jenkins verilerinin saklanacağı volume
+      - /var/run/docker.sock:/var/run/docker.sock  # Jenkins'in Docker'ı yönetmesi için
     networks:
       - jenkins_network  # Özel bir network kullanıyoruz
     environment:
-      JENKINS_ADMIN_ID: admin  # Yönetici kullanıcı adı
-      JENKINS_ADMIN_PASSWORD: admin  # Yönetici parolası
+       JENKINS_ADMIN_ID: admin  # Yönetici kullanıcı adı
+       JENKINS_ADMIN_PASSWORD: admin  # Yönetici parolası
+      #- JAVA_OPTS=-Djenkins.httpPort=-1 -Djenkins.httpsPort=8443 -Djenkins.httpsKeyStore=/var/lib/jenkins/jenkins-cert.pem -Djenkins.httpsKeyStorePassword=changeit
+
+
 
 volumes:
   jenkins_home:  # Jenkins verilerini saklamak için bir volume tanımlıyoruz
