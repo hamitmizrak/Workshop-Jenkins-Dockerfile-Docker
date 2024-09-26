@@ -26,8 +26,8 @@ chmod +x ./countdown.sh
 jenkins_count_down() {
     # 60'den aşağı say
     for ((i = 2; i >= 0; i--)); do
-        color_index=$((i % ${#colors[@]}))         # Renk dizisindeki sıraya göre renk seç
-        echo -e "${colors[$color_index]}$i\033[0m" # Sayıyı seçilen renkte yazdır ve renk sıfırla
+        color_index=$((i % ${#colors[@]}))                      # Renk dizisindeki sıraya göre renk seç
+        echo -e "Kalan Zaman: ${colors[$color_index]}$i\033[0m" # Sayıyı seçilen renkte yazdır ve renk sıfırla
         sleep 1
     done
 }
@@ -48,22 +48,21 @@ project_version() {
     echo -e "\n${colors[3]}Git Version ... "
     git -v
 
-     sleep 2
+    sleep 2
     echo -e "\n${colors[2]}Docker Version ... "
-    git -v
+    docker version
 
     # Geriye Say
     ./countdown.sh
 
-docker search jenkins
-docker ps 
-docker run -p 2222:8080 -p 50000:50000 --name docker_jenkins jenkins/jenkins
-winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
+    docker search jenkins
+    docker ps
+    docker run -p 2225:8080 -p 50005:50000 --name docker_jenkins5 jenkins/jenkins
+    winpty docker exec -it docker_jenkins bash -c "cat /var/jenkins_home/secrets/initialAdminPassword"
 
 }
 
 project_version
-
 
 ########################################################################################################################################
 ########################################################################################################################################
@@ -72,4 +71,3 @@ jenkins_restart() {
     echo -e "${colors[1]}jenkins Restart Başladı ... "
     docker container restart jenkins_container
 }
-
